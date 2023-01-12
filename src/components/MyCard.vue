@@ -30,10 +30,3 @@
         props: ['name, quantity, brand, urlKey'],
     }
 </script>
-
-
-//  computed: {
-//             welcome() {
-//                 return '${this.name}';
-//             },
-//         },

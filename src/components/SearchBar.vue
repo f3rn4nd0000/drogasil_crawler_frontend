@@ -15,22 +15,35 @@ export default {
     },
     methods: {
         submitForm() {
+            // options = {
+            //     method: 'POST', 
+            //     url: 'http://127.0.0.1:8000/', 
+            //     data: {consulta: this.query}};
+            const config = {
+                headers:{
+                    'Access-Control-Allow-Origin': '*'
+                }
+            }
             this.loading = true
+            console.log('this.query=', this.query)
             axios
-            .post("/", {
+            .post("http://127.0.0.1:8000", {
                 consulta: this.query,
-            })
+            }, config)
             .then((response) => {
                 console.log("------------");
                 console.log(response.data);
                 this.response = response.data;
                 this.sucess = "Dados recuperados com sucesso";
                 this.loading = false
+            }).catch(function (error) {
+                console.log('deu erro pai!')
+                console.log('corpo da resposta:', error.response.data)
+                console.error(error);
             })
-            this.products = "";
-            },
-        },
-    };
+        }
+    }
+}
 </script>
 
 <template>
@@ -262,35 +275,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
 </style>
 
 
-
-// old card 
-// <p>{{ item.name }}</p>
-//                         <v-container>
-//                         <v-row
-//                             align="rigth"
-//                             align-content="rigth"
-//                             class="text-rigth"
-//                             >
-//                             <v-col class="text-rigth">
-//                                 <v-img class="img"
-//                                     :src="item.image" 
-//                                     width="200" 
-//                                     height="200"></v-img>
-//                                 <h3>PREÇO: R${{ item.valueFrom }}</h3>
-//                             </v-col>
-//                         </v-row>
-//                         </v-container>
-// class="my-card"
-//                     style="width: 28rem"
-// .button-generic{
-//     background-color: ;
-// }
-
-
-//  .button-generic{
-//     background-color: white;
-// }
-
 // <!-- <v-sheet
 //                                 :class="radius"
 //                                 class="mx-auto transition-swing secondary"
@@ -303,3 +287,33 @@ only screen and (min-device-pixel-ratio: 1.5) {
 //                                 ></v-img> -->
 //                             <!-- </v-sheet> -->
 
+
+<!-- 
+this.loading = true
+axios
+.post("http://127.0.0.1:8000", {
+    consulta: this.query,
+})
+.then((response) => {
+    console.log("------------");
+    console.log(response.data);
+    this.response = response.data;
+    this.sucess = "Dados recuperados com sucesso";
+    this.loading = false
+}).catch(function (error) {
+    console.error(error);
+}); -->
+
+<!-- submitForm() {
+    this.loading = true;
+    var options = {method: 'POST', url: 'http://127.0.0.1:8000/', data: {consulta: this.query}};
+    axios.request(options).then(function (response) {
+    console.log('--------------------');
+    console.log(response.data);
+    }).catch(function (error) {
+    console.error(error);
+    });
+    this.products = "";
+    },
+},
+}; -->
